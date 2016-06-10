@@ -52,4 +52,29 @@ export class PizzaList {
       `)
   }
 
+  cookAll (drawPizzaList) {
+    console.log('cook all')
+
+    this.getPizzas()
+      .then(pizzas => {
+        const pizza = pizzas.find(p => p.status === 0)
+
+        if (pizza) {
+          return new Pizza(pizza).cook()
+            .then(pizza => {
+              this.savePizza(pizza)
+            })
+        }
+
+        throw Error('No more pizzas')
+      })
+      .then(pizza => {
+        drawPizzaList()
+        this.cookAll(drawPizzaList)
+      })
+      .catch(error => {
+        console.log('fin de la cuisson')
+      })
+  }
+
 }

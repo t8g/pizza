@@ -8,6 +8,7 @@ var pizzaArea = document.getElementById('pizzaToppings')
 var pizzaName = document.getElementById('pizzaName')
 var savePizza = document.getElementById('savePizza')
 var newPizza = document.getElementById('newPizza')
+var cookPizzas = document.getElementById('cookPizzas')
 
 document.getElementById('toppings').innerHTML = new Pizza().allToppingsToHtml()
 Array.prototype.slice.call(document.getElementsByClassName('topping'))
@@ -50,6 +51,11 @@ savePizza.addEventListener('click', evt => {
 newPizza.addEventListener('click', evt => {
   pizza = new Pizza({ name: 'autre pizza' })
   drawPizza()
+})
+
+cookPizzas.addEventListener('click', evt => {
+  console.log('coucou')
+  pizzaList.cookAll(drawPizzaList)
 })
 
 function drawPizza () {
