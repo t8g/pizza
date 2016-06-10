@@ -9,6 +9,7 @@ var pizzaName = document.getElementById('pizzaName')
 var savePizza = document.getElementById('savePizza')
 var newPizza = document.getElementById('newPizza')
 var cookPizzas = document.getElementById('cookPizzas')
+const container = document.getElementById('container')
 
 document.getElementById('toppings').innerHTML = new Pizza().allToppingsToHtml()
 Array.prototype.slice.call(document.getElementsByClassName('topping'))
@@ -45,11 +46,15 @@ savePizza.addEventListener('click', evt => {
   pizzaList.savePizza(pizza)
   drawPizzaList()
   pizza = null
-  drawPizza()
+  container.style.display = 'none'
+  container.style.visibility = 'hidden'
+  pizzaName.value = ''
 }, false)
 
 newPizza.addEventListener('click', evt => {
-  pizza = new Pizza({ name: 'autre pizza' })
+  pizza = new Pizza({ name: 'autre pizza' }) 
+  container.style.display = 'block'
+  container.style.visibility = 'visible'
   drawPizza()
 })
 
@@ -65,7 +70,6 @@ function drawPizza () {
     return
   }
   pizzaArea.innerHTML = pizza.toppings2string()
-  pizzaName.value = pizza.name
 }
 drawPizza()
 
@@ -81,6 +85,7 @@ function drawPizzaList () {
               .then(drawPizzaList)
           }, false)
         })
+
       Array.prototype.slice.call(document.getElementsByClassName('selectPizza'))
         .forEach(button => {
           button.addEventListener('click', evt => {
