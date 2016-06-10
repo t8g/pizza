@@ -92,6 +92,9 @@ function drawPizzaList () {
             pizzaList.getPizza(button.dataset.id)
               .then(json => {
                 pizza = new Pizza(json)
+                pizzaName.value = pizza.name
+                container.style.display = 'block'
+                container.style.visibility = 'visible'
                 drawPizza()
               }, false)
           })
