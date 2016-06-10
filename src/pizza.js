@@ -2,10 +2,11 @@ import { toppings as authorizedToppings } from './toppings.js'
 
 export class Pizza {
 
-  constructor (name, toppings = []) {
+  constructor ({ name = 'new pizza', id = null, toppings = [], status = 0 } = {}) {
+    if (id) this.id = id
     this.name = name
     this.toppings = toppings
-    this.status = 0 // 0 === crue, 1 === en cours de cuisson, 2 === cuite
+    this.status = status // 0 === crue, 1 === en cours de cuisson, 2 === cuite
   }
 
   setName (name) {
@@ -65,6 +66,27 @@ export class Pizza {
         return `${this.translate(topping, lang)}`
       })
       .join(', ')
+  }
+
+  toHtml () {
+    return `
+      <tr>
+        <td>${this.name}</td>
+        <td>${this.toppings2string()}</td>
+        <td>${this.status}</td>
+        <td><button data-id="${this.id}" type="button" class="close deletePizza"><span>&times;</span></button></td>
+      </tr>
+    `
+  }
+
+  allToppingsToHtml () {
+    return `
+      <ul class="list-group">
+      ${Object.keys(authorizedToppings)
+        .map(topping => `
+          <li data-topping="${topping}" draggable="true" class="topping list-group-item" style="cursor:move">${this.translate(topping)}</li>
+        `).join('')}
+      </ul>`
   }
 
 }

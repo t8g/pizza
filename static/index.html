@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      .toto :first-child {
-        color: red
-      }
-      #toppings {
-        background: green
-      }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body>
 
-    <button id="createPizza">Créer pizza</button>
+    <div class="container-fluid">
 
-    <br>
+      <div class="row">
+        <div class="col-md-12" id="pizzas"></div>
+      </div>
 
-    <div id="toppings">
-      Toppings :
+      <div class="row">
+        <div class="col-md-8">
+          <h3>Pizza</h3>
+          <input type="text" class="form-control">
+          <br>
+          <div class="well" id="pizza"></div>
+          <button>Enregistrer</button>
+        </div>
+        <div class="col-md-4">
+          <h3>Liste des ingrédients</h3>
+          <div id="toppings"></div>
+        </div>
+      </div>
+
     </div>
-
-    <br>
-
-    <button id="savePizza">Enregistrer pizza</button>
-
-    <br>
-    <h2 id="pizza"></h2>
-
-    <span class="toto"><span>un</span> kkjhkj</span>
-    <span class="toto">deux</span>
-    <span class="toto">trois</span>
 
     <script src="build.js"></script>
   </body>

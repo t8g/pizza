@@ -2,99 +2,58 @@ import { Pizza } from './pizza.js'
 import { PizzaList } from './pizza-list.js'
 import { toppings } from './toppings.js'
 
+// var pizzaList = new PizzaList()
+var pizza = new Pizza({ name: 'autre pizza', toppings: ['eggs'] })
 
-var x = document.getElementsByClassName('toto')
-console.log(x)
-
-var pizzaList = new PizzaList()
-
-var pizza = null
-
-var h2 = document.getElementById('pizza')
-
-document.getElementById('createPizza').addEventListener('click', function (evt) {
-  pizza = new Pizza('test')
-  h2.innerHTML = pizza.name + ' ' + pizza.toppings2string()
-}, false)
-
-var toppingsButtons = document.getElementById('toppings')
-Object.keys(toppings).forEach(topping => {
-
-  const toppingButton = document.createElement('button')
-  toppingButton.innerHTML = topping
-
-  toppingButton.addEventListener('click', evt => {
-    pizza.addTopping(topping)
-    console.log(pizza)
+document.getElementById('toppings').innerHTML = pizza.allToppingsToHtml()
+Array.prototype.slice.call(document.getElementsByClassName('topping'))
+  .forEach(li => {
+    li.addEventListener('dragstart', evt => {
+      evt.dataTransfer.setData('text/html', li.dataset.topping)
+    }, false)
   })
 
-  toppingsButtons.appendChild(toppingButton)
+var pizzaArea = document.getElementById('pizza')
 
-})
+pizzaArea.addEventListener('dragenter', evt => {
+  evt.preventDefault()
+  evt.target.style.backgroundColor = 'red'
+}, false)
 
-// document.getElementById('eggs').addEventListener('click', function (evt) {
-//   pizza.addTopping('eggs')
-//   console.log(this.getAttribute('data')
-//   h2.innerHTML = pizza.name + ' ' + pizza.toppings2string()
-// }, false)
+pizzaArea.addEventListener('dragover', evt => {
+  evt.preventDefault()
+}, false)
 
+pizzaArea.addEventListener('dragleave', evt => {
+  evt.preventDefault()
+  evt.target.style.backgroundColor = '#f5f5f5'
+}, false)
 
-// pizzaList.addPizza(
-//   new Pizza('Funghi')
-//     .addTopping('tomato sauce')
-//     .addTopping('mozzarella')
-//     .addTopping('mushrooms')
-// )
+pizzaArea.addEventListener('drop', evt => {
+  evt.preventDefault()
+  pizza.addTopping(evt.dataTransfer.getData('text/html'))
+  evt.target.style.backgroundColor = '#f5f5f5'
+  drawPizza()
+}, false)
 
-// pizzaList.pizzas[0]
-//   .cook(2000)
-//   .then(() => {
-//     console.log('Bing ! Pizza cuite')
-//   })
-//   .catch(err => {
-//     console.log(err)
-//   })
+function drawPizza () {
+  pizzaArea.innerHTML = pizza.toppings2string()
+}
+drawPizza()
 
-// setTimeout(function () {
-//   pizzaList.pizzas[0]
-//     .cook(1000)
-//     .then(() => {
-//       console.log('Bing ! Pizza cuite')
-//     })
-//     .catch(err => {
-//       console.log(err)
-//     })
-// }, 1000)
-
-// setTimeout(function () {
-//   pizzaList.pizzas[0]
-//     .cook(1000)
-//     .then(() => {
-//       console.log('Bing ! Pizza cuite')
-//     })
-//     .catch(err => {
-//       console.log(err)
-//     })
-// }, 2500)
-
-
-
-// pizzaList.getPizzas()
-//   .then(pizzas => {
-//     pizzas = pizzas.map(p => new Pizza(p.name, p.toppings))
-//     pizzas[0]
-//       .cook(1000)
-//         .then(() => {
-//           console.log('Bing ! Pizza cuite')
-//           return pizzas[1].cook(1000)
+// function drawPizzaList () {
+//   pizzaList.toHtml()
+//     .then(html => {
+//       document.getElementById('pizzas').innerHTML = html
+//       // astuce pour utiliser un NodeList comme un tableau
+//       Array.prototype.slice.call(document.getElementsByClassName('deletePizza'))
+//         .forEach(button => {
+//           button.addEventListener('click', evt => {
+//             pizzaList.deletePizza(button.dataset.id)
+//               .then(drawPizzaList)
+//           })
 //         })
-//         .then(() => {
-//           console.log('Bing ! Pizza cuite')
-//         })
-//   })
+//     })
+// }
 
-// pizzaList.pizzas[0].cook(5000)
-//   .then(() => {
-//     console.log('Pizza cuite')
-//   })
-
+// drawPizzaList()

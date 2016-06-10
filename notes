@@ -42,31 +42,25 @@
 //     drawList(evt.target.value)
 //   }, false)
 
+// set draggable="true" on source element
 document.getElementById('source').addEventListener('dragstart', evt => {
   console.log('dragstart')
-  evt.dataTransfer.setData('text/html', 'toto')
+  evt.dataTransfer.setData('text/html', 'Une info à passer')
 }, false)
 
-// document.addEventListener('drag', evt => {
-//   console.log('drag')
-//   // evt.dataTransfer.setData('text/plain', 'toto')
-// }, false)
-
-document.addEventListener('dragover', evt => {
+document.getElementById('target').addEventListener('dragover', evt => {
   evt.preventDefault()
-  console.log('dragover')
-  // console.log('drop', evt.dataTransfer.getData('text'))
+  evt.target.style.backgroundColor = '#eee'
 }, false)
 
 document.getElementById('target').addEventListener('dragleave', evt => {
-  console.log('dragleave')
-  // console.log('drop', evt.dataTransfer.getData('text'))
+  evt.preventDefault()
+  evt.target.style.backgroundColor = '#fff'
 }, false)
 
 document.getElementById('target').addEventListener('drop', evt => {
   evt.preventDefault()
-  console.log('drop')
-  // console.log('drop', evt.dataTransfer.getData('text'))
+  console.log('drop', evt.dataTransfer.getData('text/html'))
 }, false)
 
 
