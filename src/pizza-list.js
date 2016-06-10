@@ -46,7 +46,7 @@ export class PizzaList {
       .then(pizzas => pizzas.map(json => new Pizza(json)))
       .then(pizzas => pizzas.map(pizza => pizza.toHtml()))
       .then(pizzaRows => `
-        <table class="table">
+        <table class="table table-bordered">
           ${pizzaRows.join('')}
         </table>
       `)

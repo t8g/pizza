@@ -3,19 +3,20 @@ import { PizzaList } from './pizza-list.js'
 import { toppings } from './toppings.js'
 
 var pizzaList = new PizzaList()
-var pizza = new Pizza({ name: 'autre pizza', toppings: ['eggs'] })
+var pizza = null
 
-document.getElementById('toppings').innerHTML = pizza.allToppingsToHtml()
+var pizzaArea = document.getElementById('pizzaToppings')
+var pizzaName = document.getElementById('pizzaName')
+var savePizza = document.getElementById('savePizza')
+var newPizza = document.getElementById('newPizza')
+
+document.getElementById('toppings').innerHTML = new Pizza().allToppingsToHtml()
 Array.prototype.slice.call(document.getElementsByClassName('topping'))
   .forEach(li => {
     li.addEventListener('dragstart', evt => {
       evt.dataTransfer.setData('text/html', li.dataset.topping)
     }, false)
   })
-
-var pizzaArea = document.getElementById('pizzaToppings')
-var pizzaName = document.getElementById('pizzaName')
-var savePizza = document.getElementById('savePizza')
 
 pizzaArea.addEventListener('dragenter', evt => {
   evt.preventDefault()
@@ -39,12 +40,25 @@ pizzaArea.addEventListener('drop', evt => {
 }, false)
 
 savePizza.addEventListener('click', evt => {
+  if (!pizza) return
   pizza.setName(pizzaName.value)
   pizzaList.savePizza(pizza)
   drawPizzaList()
+  pizza = null
+  drawPizza()
+}, false)
+
+newPizza.addEventListener('click', evt => {
+  pizza = new Pizza({ name: 'autre pizza' })
+  drawPizza()
 })
 
 function drawPizza () {
+  if (!pizza) {
+    pizzaArea.innerHTML = 'NO PIZZA SELECTED'
+    pizzaName.value = ''
+    return
+  }
   pizzaArea.innerHTML = pizza.toppings2string()
   pizzaName.value = pizza.name
 }
