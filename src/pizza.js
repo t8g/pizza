@@ -73,7 +73,7 @@ export class Pizza {
       <tr>
         <td><a data-id="${this.id}" class="selectPizza">${this.name}</a></td>
         <td>${this.toppings2string()}</td>
-        <td>${this.status}</td>
+        <td>${this.statusToHtml()}</td>
         <td><button data-id="${this.id}" type="button" class="close deletePizza"><span>&times;</span></button></td>
       </tr>
     `
@@ -88,5 +88,17 @@ export class Pizza {
         `).join('')}
       </ul>`
   }
+
+  statusToHtml () {
+    switch (this.status) {
+      case 0:
+        return '<button class="btn cookPizza" data-id="' + this.id + '">Cuire</button>'
+      case 1:
+        return '...'
+      case 2:
+        return 'Cuite'
+    }
+  }
+
 
 }

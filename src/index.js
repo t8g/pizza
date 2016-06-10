@@ -73,7 +73,7 @@ function drawPizzaList () {
           button.addEventListener('click', evt => {
             pizzaList.deletePizza(button.dataset.id)
               .then(drawPizzaList)
-          })
+          }, false)
         })
       Array.prototype.slice.call(document.getElementsByClassName('selectPizza'))
         .forEach(button => {
@@ -82,9 +82,29 @@ function drawPizzaList () {
               .then(json => {
                 pizza = new Pizza(json)
                 drawPizza()
-              })
+              }, false)
           })
         })
+
+      Array.prototype.slice.call(document.getElementsByClassName('cookPizza'))
+              .forEach(button => {
+                button.addEventListener('click', function (evt) {
+                  console.log('cuisson')
+
+                  pizzaList.getPizza(button.dataset.id)
+                    .then(json => {
+                      console.log(json)
+                      new Pizza(json).cook().then(
+                        (p) => {
+                          // enregistrer la pizza
+                          pizzaList.savePizza(p)
+                          // mettre à jour l'affichage
+                          drawPizzaList()
+                        }
+                      )
+                    })
+                }, false)
+              })
     })
 }
 
