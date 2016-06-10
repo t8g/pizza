@@ -14,12 +14,25 @@ export class PizzaList {
     return this.db.pizzas.add(pizza)
   }
 
+  updatePizza (pizza) {
+    return this.db.pizzas.put(pizza)
+  }
+
+  savePizza (pizza) {
+    if (!pizza.id) return this.addPizza(pizza)
+    return this.updatePizza(pizza)
+  }
+
   deletePizza (id) {
     return this.db.pizzas.delete(parseInt(id))
   }
 
   getPizzas () {
     return this.db.pizzas.toArray()
+  }
+
+  getPizza (id) {
+    return this.db.pizzas.get(parseInt(id))
   }
 
   // with (topping) {

@@ -71,7 +71,7 @@ export class Pizza {
   toHtml () {
     return `
       <tr>
-        <td>${this.name}</td>
+        <td><a data-id="${this.id}" class="selectPizza">${this.name}</a></td>
         <td>${this.toppings2string()}</td>
         <td>${this.status}</td>
         <td><button data-id="${this.id}" type="button" class="close deletePizza"><span>&times;</span></button></td>
