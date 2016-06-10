@@ -1,6 +1,5 @@
 import { Pizza } from './pizza.js'
 import { PizzaList } from './pizza-list.js'
-import { toppings } from './toppings.js'
 
 var pizzaList = new PizzaList()
 var pizza = null
