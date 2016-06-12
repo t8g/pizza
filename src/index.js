@@ -52,14 +52,13 @@ savePizza.addEventListener('click', evt => {
 }, false)
 
 newPizza.addEventListener('click', evt => {
-  pizza = new Pizza({ name: 'autre pizza' }) 
+  pizza = new Pizza({ name: 'autre pizza' })
   container.style.display = 'block'
   container.style.visibility = 'visible'
   drawPizza()
 })
 
 cookPizzas.addEventListener('click', evt => {
-  console.log('coucou')
   pizzaList.cookAll(drawPizzaList)
 })
 
@@ -103,11 +102,8 @@ function drawPizzaList () {
       Array.prototype.slice.call(document.getElementsByClassName('cookPizza'))
               .forEach(button => {
                 button.addEventListener('click', function (evt) {
-                  console.log('cuisson')
-
                   pizzaList.getPizza(button.dataset.id)
                     .then(json => {
-                      console.log(json)
                       new Pizza(json).cook().then(
                         (p) => {
                           // enregistrer la pizza

@@ -53,8 +53,6 @@ export class PizzaList {
   }
 
   cookAll (drawPizzaList) {
-    console.log('cook all')
-
     this.getPizzas()
       .then(pizzas => {
         const pizza = pizzas.find(p => p.status === 0)
@@ -72,7 +70,7 @@ export class PizzaList {
         drawPizzaList()
         this.cookAll(drawPizzaList)
       })
-      .catch(error => {
+      .catch(() => {
         console.log('fin de la cuisson')
       })
   }
