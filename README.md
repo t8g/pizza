@@ -10,3 +10,5 @@ Projet de Etienne Bohain et Samuel Perchaud
 https://github.com/SamuelPerchaud/formation-dta-javascript
 
 MONMARTHE Antonin & DIDIER Jean-Philippe : https://github.com/amonmart/Pizzeria-JavaScript
+
+Arthur & Albin https://github.com/bordessoules/javascript-dta
